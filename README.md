@@ -74,13 +74,13 @@ $ npm run start:prod
 ```
 The server will be available at http://localhost:3000 by default.
 
-## 6. Run tests
+### 6. Run tests
 
 ```bash
 # e2e tests
 $ npm run test:e2e
 ```
-## 7. Usage
+### 7. Usage
 
 You can use tools like [Postman](https://www.postman.com/) or [cURL](https://curl.se/) to make HTTP requests to the server and test the different routes and functionalities of the backend.
 
