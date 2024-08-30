@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Command to start your Nest.js application
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "start:prod" ]
