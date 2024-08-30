@@ -22,17 +22,45 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Backend Test Project
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project is a backend developed with Nest.js, a Node.js framework that helps build scalable and efficient server-side applications.
 
-## Project setup
+## Prerequisites
+
+Before you begin, make sure you have the following prerequisites installed:
+
+- [Node.js](https://nodejs.org/) (recommended version: 16.x or higher)
+
+## Installation
+
+### 1. Install Nest.js
+
+Follow the instructions in the [official Nest.js documentation](https://docs.nestjs.com/first-steps) to install the Nest.js CLI globally:
 
 ```bash
-$ npm install
+npm i -g @nestjs/cli
 ```
+### 2. Download the Project
 
-## Compile and run the project
+Download the project from the repository using the following link:
+
+[Download the project (ZIP)](https://github.com/Diego-Castiblanque-Alberca/Backend_Test/archive/refs/heads/master.zip)
+
+### 3. Extract the Project
+
+Extract the downloaded file to a folder of your choice.
+
+### 4. Install Dependencies
+
+Open a terminal in the root directory of the project and run the following command to install all the necessary dependencies:
+
+```bash
+npm install
+```
+### 5. Run the Project
+
+To start the server in development mode, run the following command:
 
 ```bash
 # development
@@ -44,18 +72,43 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+The server will be available at http://localhost:3000 by default.
 
-## Run tests
+## 6. Run tests
 
 ```bash
-# unit tests
-$ npm run test
-
 # e2e tests
 $ npm run test:e2e
+```
+## 7. Usage
 
-# test coverage
-$ npm run test:cov
+You can use tools like [Postman](https://www.postman.com/) or [cURL](https://curl.se/) to make HTTP requests to the server and test the different routes and functionalities of the backend.
+
+## API Endpoints
+
+Below are the available API endpoints:
+
+### Find Pokémon by Name or ID
+
+- **Endpoint:** `(POST) /pokemon/findByNameOrId/{nameOrId}/`
+- **Description:** Allows searching for a Pokémon by its name or ID.
+- **Examples:**
+  - By name:
+    ```http
+    POST http://localhost:3000/pokemon/findByNameOrId/pikachu/
+    ```
+  - By ID (Example for Pikachu, ID: 25):
+    ```http
+    POST http://localhost:3000/pokemon/findByNameOrId/25/
+    ```
+
+### Get Pokémon CSV File by Color
+
+- **Endpoint:** `(GET) /pokemon/csv/{color}`
+- **Description:** Returns a CSV file with Pokémon filtered by color.
+- **Example:**
+  ```http
+  GET http://localhost:3000/pokemon/csv/black
 ```
 
 ## Resources
