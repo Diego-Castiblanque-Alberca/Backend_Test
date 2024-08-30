@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { Pokemon } from './DTOs/pokemonDTO';
 import { responseFindPokemonDTO } from './DTOs/responseFindPokemonDTO';
 import { ResponseFindPokemonColorDTO } from './DTOs/responseFindPokemonColorDTO';
+import { AsyncParser } from '@json2csv/node';
+import { string as stringFormatter } from '@json2csv/formatters';
 
 @Injectable()
 export class AppService {
@@ -29,7 +31,7 @@ export class AppService {
       };
       return pokemonData;
     } catch (error) {
-      console.log('Error al obtener el Pokémon');
+      console.log('Error when getting the Pokémon data');
       console.log(error);
     }
   }
@@ -48,19 +50,31 @@ export class AppService {
       pokemonListJson.pokemon_species.forEach((pokemon) => {
         pokemonListNames.push(pokemon.name);
       });
-
+      console.log(pokemonListNames);
       const pokemonList: Pokemon[] = [];
       for (const pokemonName of pokemonListNames) {
         const pokemon = await this.getPokemonByNameOrID(pokemonName, null);
-        pokemonList.push(pokemon);
+        if (pokemon) {
+          pokemonList.push(pokemon);
+        }
       }
       pokemonList.sort((a, b) => a.base_experience - b.base_experience);
 
-      return Promise.resolve('Pokemons list');
+      const opts = {
+        fields: ['id', 'name', 'base_experience', 'height', 'weight'],
+        delimiter: ';',
+        formatters: { string: stringFormatter({ quote: '' }) },
+      };
+      const transformOpts = {};
+      const asyncOpts = {};
+      const parser = new AsyncParser(opts, asyncOpts, transformOpts);
+
+      const csv = await parser.parse(pokemonList).promise();
+      return csv;
     } catch (error) {
-      console.log('Error al obtener la lista de Pokémon');
+      console.log('Error when getting the Pokémon list');
       console.log(error);
     }
-
   }
+
 }
